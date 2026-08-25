@@ -1,19 +1,59 @@
-* {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+/* three-part.css
+   Structural skeleton: reset + the header / main / footer frame.
+   Visual design (color, type) lives in main.css and the per-page files. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
 html {
-        height: 100%;
-        font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
+
 body {
-        display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: repeat(2, auto) 1fr;
-        height: 100%;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-/* 
-    One column and three rows: 
-    header, main and footer.
-*/
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+header,
+main,
+footer {
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.wrap {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+ul,
+ol {
+  padding-left: 1.25em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

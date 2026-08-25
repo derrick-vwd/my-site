@@ -1,60 +1,253 @@
+/* main.css
+   Design tokens + the visual language of the site.
+
+   Palette — "quiet study": warm stone paper, low-saturation sage accent.
+   Chosen to feel calm and unhurried rather than bright or corporate. */
+
+:root {
+  --color-bg: #eae8e1;
+  --color-surface: #f6f5f1;
+  --color-text: #2a2d29;
+  --color-text-muted: #6b6f66;
+  --color-border: #d8d5c9;
+  --color-accent: #5f7c70;
+  --color-accent-strong: #3f5850;
+  --color-accent-soft: #dde4de;
+  --color-focus: #3f5850;
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, Menlo, monospace;
+
+  --radius: 10px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+}
+
+a {
+  color: var(--color-accent-strong);
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration-color: currentColor;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+  margin-top: 2.5rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+}
+
+p {
+  margin: 0 0 1.1em;
+  max-width: 65ch;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-strong);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/* ---------- Header ---------- */
+
 header {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
+  padding-top: clamp(1.75rem, 4vw, 2.75rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
-header > h1 {
-    font-size: 1.25rem;
+
+header .wrap {
+  max-width: 46rem;
 }
-header > p {
-    border: 1px solid blue;
-    font-size: 0.85rem;
-    margin: 1rem 0;
-    padding: 1rem;
-    width: 200px;
+
+header h1 {
+  font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+  margin: 0 0 0.6rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
 }
-header > nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+
+header h1::after {
+  content: "";
+  width: 0.5ch;
+  height: 1em;
+  background: var(--color-accent);
+  display: inline-block;
+  animation: blink 1.4s step-end infinite;
+  margin-left: 0.1em;
 }
-header > nav div {
-    width: 100%;
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
-header > nav div a {
-    background-color: lightgray;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    font-size: 0.85rem;
-    justify-content: center;
-    padding: 0.5rem 0;
-    text-decoration: none;
-    width: 100%;
+
+header p {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  max-width: 60ch;
 }
-header > nav div a:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
 }
+
+nav div a {
+  display: inline-block;
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+nav div a::before {
+  content: "./";
+  color: var(--color-border);
+}
+
+nav div a:hover {
+  color: var(--color-accent-strong);
+  border-color: var(--color-border);
+  background: var(--color-accent-soft);
+}
+
+/* current page indicator, set via body[data-page] in each html file's nav */
+nav div a[aria-current="page"] {
+  color: var(--color-accent-strong);
+  background: var(--color-accent-soft);
+  border-color: var(--color-border);
+}
+
+/* ---------- Main content ---------- */
+
 main {
-    padding: 1rem;
+  padding-top: clamp(2rem, 5vw, 3.25rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
 }
+
+main .wrap {
+  max-width: 42rem;
+}
+
+/* ---------- Footer ---------- */
+
 footer {
-    align-items: end;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    font-size: .75em;
-    font-weight: bold;
+  border-top: 1px solid var(--color-border);
+  padding-block: 1.5rem;
+  background: var(--color-surface);
 }
 
-@media screen and (min-width: 500px) {
-    footer {
-        font-size: 0.9rem;    
-    }
+footer p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
 }
 
+/* ---------- Forms (shared baseline; contact.css refines layout) ---------- */
+
+input,
+textarea {
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.75em 0.9em;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+input[type="submit"],
+button {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  background: var(--color-accent-strong);
+  color: var(--color-surface);
+  border: 1px solid var(--color-accent-strong);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 30rem) {
+  body {
+    font-size: 16px;
+  }
+
+  nav {
+    font-size: 0.8rem;
+  }
+}

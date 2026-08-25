@@ -1,26 +1,30 @@
-code {
-    color: green;
+/* home.css — page-specific rules for index.html */
+
+article h2 {
+  margin-top: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.9em 1.1em;
+  font-size: 1rem;
 }
-article p {
-    line-height: 2rem;
-    font-size: 0.75rem;
-    padding: 1rem 0;
+
+article h2 code {
+  background: none;
+  color: var(--color-accent-strong);
+  padding: 0;
+  font-size: 1em;
 }
-@media screen and (min-width: 500px) {
-    article p {
-        width: 80%;
-    }
+
+aside {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--color-border);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
 }
-@media screen and (min-width: 700px) {
-    article {
-        align-items: center;
-        flex-direction: column;
-        display: flex;
-        justify-content: center;    
-    }
-    article p {
-        width: 500px;
-        font-size: 1rem;
-        text-align: left;
-    }
+
+aside p {
+  margin: 0;
 }
